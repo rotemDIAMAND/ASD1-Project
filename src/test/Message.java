@@ -4,7 +4,7 @@ import java.util.Date;
 
 public final class Message {
 
-    private final byte[] data;
+    public final byte[] data;
     public final String asText;
     public final double asDouble;
     public final Date date;
