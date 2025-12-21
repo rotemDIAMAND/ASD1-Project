@@ -1,54 +1,37 @@
 package test;
-import java.util.Arrays;
+
 import java.util.Date;
 
 public final class Message {
 
-    public final byte[] data;
+    private final byte[] data;
+    public final String asText;
     public final double asDouble;
     public final Date date;
 
-    /* ===== בנאי מרכזי ===== */
-    public Message(String text) {
-        this.data = text.getBytes();
-
-        double value;
-        try {
-            value = Double.parseDouble(text);
-        } catch (NumberFormatException e) {
-            value = Double.NaN;
-        }
-        this.asDouble = value;
-
+    public Message(byte[] data) {
+        this.data = data.clone(); // defensive copy
+        this.asText = new String(this.data);
+        this.asDouble = parseDoubleSafe(this.asText);
         this.date = new Date();
     }
 
-    /* ===== reuse באמצעות this() ===== */
-    public Message(byte[] data) {
-        this(new String(data));
+    public Message(String text) {
+        this.data = text.getBytes();
+        this.asText = text;
+        this.asDouble = parseDoubleSafe(text);
+        this.date = new Date();
     }
 
-    public Message(double number) {
-        this(Double.toString(number));
+    public Message(double value) {
+        this(Double.toString(value));
     }
 
-    /* ===== getters ===== */
-
-    public byte[] getData() {
-        return Arrays.copyOf(data, data.length);
-    }
-
-    public String asText() {
-        return new String(data);
-    }
-
-    public double asDouble() {
-        return asDouble;
-    }
-
-    public Date getDate() {
-        return new Date(date.getTime());
+    private double parseDoubleSafe(String text) {
+        try {
+            return Double.parseDouble(text);
+        } catch (NumberFormatException e) {
+            return Double.NaN;
+        }
     }
 }
-
-
