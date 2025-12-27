@@ -3,7 +3,6 @@ package configs;
 import java.util.function.BinaryOperator;
 import graph.Agent;
 import graph.Message;
-import graph.Topic;
 import graph.TopicManagerSingleton;
 
 public class BinOpAgent implements Agent {
