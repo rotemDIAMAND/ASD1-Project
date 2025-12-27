@@ -10,7 +10,7 @@ public class TopicManagerSingleton {
         return TopicManager.instance;
     }
 
-    static class TopicManager {
+    public static class TopicManager {
 
         private static final TopicManager instance = new TopicManager();
         private final Map<String, Topic> topics;
