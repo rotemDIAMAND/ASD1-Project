@@ -12,7 +12,6 @@ public class GenericConfig implements Config {
     private String fileName;
     private final List<Agent> agents = new ArrayList<>();
 
-    @Override
     public void setConfFile(String fileName) {
         this.fileName = fileName;
     }
